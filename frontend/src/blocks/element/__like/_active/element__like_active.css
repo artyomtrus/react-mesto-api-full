@@ -1,0 +1,13 @@
+.element__like_active {
+	padding: 0;
+	border: none;
+	min-height: 19px;
+	min-width: 22px;
+	background: url(../../../../images/likeActive.svg) transparent;
+	position: relative;
+}
+
+.element__like_active:hover {
+	cursor: pointer;
+	opacity: .5;
+}

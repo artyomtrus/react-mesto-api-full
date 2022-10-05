@@ -1,0 +1,7 @@
+.element__footer {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	margin: auto 20px;
+}

@@ -1,0 +1,38 @@
+.header__registration {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  color: #ffffff;
+  text-decoration: none;
+margin: auto;
+}
+
+.header__registration:hover {
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity .5s;
+}
+
+.header__container{
+ display: flex;
+}
+
+.header__email{
+  color: #ffffff;
+}
+
+.header__sign-out {
+  color: #A9A9A9;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  text-decoration: none;
+  margin: auto;
+  padding-left: 24px;
+}
+
+.header__sign-out:hover {
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity .5s;
+}

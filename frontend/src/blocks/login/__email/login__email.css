@@ -1,0 +1,11 @@
+.login__email {
+	border: none;
+	min-height: 40px;
+	border-bottom: 2px solid #CCCCCC;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 17px;
+	background-color: #000000;
+	color: #ffffff;
+}

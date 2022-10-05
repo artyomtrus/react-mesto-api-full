@@ -1,0 +1,10 @@
+.element__del_active {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	display: block;
+}
+
+.element__del_active:hover {
+	cursor: pointer;
+}
