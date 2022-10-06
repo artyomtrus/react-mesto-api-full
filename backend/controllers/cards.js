@@ -13,7 +13,7 @@ const getCards = (req, res, next) => {
 
 const deleteCard = (req, res, next) => {
   Card.findById(req.params.cardId)
-    .orFail(new NotFoundError('Карточка с указанным _id не найдена.'))
+    .orFail(new NotFoundError('Карточка с указанным _id не найдена'))
     .then((card) => {
       if (card.owner.toString() !== req.user._id) {
         next(new IncorrectUser('Нельзя удалять чужие карточки'));
