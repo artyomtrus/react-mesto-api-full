@@ -8,21 +8,21 @@ class Api {
   }
 
   getCards() {
-    return fetch(`${this._baseUrl}/v1/cohort-44/cards`, {
+    return fetch(`${this._baseUrl}/cards`, {
       method: "GET",
       headers: this._headers,
     }).then(this._getResponseData);
   }
 
   getUserId() {
-    return fetch(`${this._baseUrl}/v1/cohort-44/users/me`, {
+    return fetch(`${this._baseUrl}/users/me`, {
       method: "GET",
       headers: this._headers,
     }).then(this._getResponseData);
   }
 
   setUserId(data) {
-    return fetch(`${this._baseUrl}/v1/cohort-44/users/me`, {
+    return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify(data),
@@ -30,7 +30,7 @@ class Api {
   }
 
   createCard(data) {
-    return fetch(`${this._baseUrl}/v1/cohort-44/cards`, {
+    return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
@@ -41,7 +41,7 @@ class Api {
   }
 
   deleteCard(id) {
-    return fetch(`${this._baseUrl}/v1/cohort-44/cards/${id}`, {
+    return fetch(`${this._baseUrl}/cards/${id}`, {
       method: "DELETE",
       headers: this._headers,
     }).then(this._getResponseData);
@@ -49,12 +49,12 @@ class Api {
 
   setLikeStatus(id, isLiked) {
     if (isLiked) {
-      return fetch(`${this._baseUrl}/v1/cohort-44/cards/${id}/likes`, {
+      return fetch(`${this._baseUrl}/cards/${id}/likes`, {
         method: "DELETE",
         headers: this._headers,
       }).then(this._getResponseData);
     } else {
-      return fetch(`${this._baseUrl}/v1/cohort-44/cards/${id}/likes`, {
+      return fetch(`${this._baseUrl}/cards/${id}/likes`, {
         method: "PUT",
         headers: this._headers,
       }).then(this._getResponseData);
@@ -62,7 +62,7 @@ class Api {
   }
 
   createNewAvatar(data) {
-    return fetch(`${this._baseUrl}/v1/cohort-44/users/me/avatar`, {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
@@ -72,7 +72,7 @@ class Api {
   }
 
   registration(email, password) {
-    return fetch(`${this._baseUrl}/signup`, {
+    return fetch(`${this._authBaseUrl}/signup`, {
       method: "POST",
       headers: this._authHeaders,
       body: JSON.stringify({
@@ -83,7 +83,7 @@ class Api {
   }
 
   authorize(email, password) {
-    return fetch(`${this._baseUrl}/signin`, {
+    return fetch(`${this._authBaseUrl}/signin`, {
       method: "POST",
       headers: this._authHeaders,
       body: JSON.stringify({
