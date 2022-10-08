@@ -49,7 +49,7 @@ function App() {
   const handleCloseRegPopup = () => {
     setInfoTooltipOpen(false);
     if (isRegOk) {
-      history.push("/sign-in");
+      history.push("/signin");
     }
   };
 
@@ -282,10 +282,10 @@ function App() {
               handleCardDelete={handleCardDelete}
             />
 
-            <Route exact path="/sign-in">
+            <Route exact path="/signin">
               <Login handleAuthorize={handleAuthorize} />
             </Route>
-            <Route exact path="/sign-up">
+            <Route exact path="/signup">
               <Register
                 handleReg={handleReg}
                 isRegOk={handleIsRegOk}
@@ -294,7 +294,7 @@ function App() {
               />
             </Route>
             <Route exact path="/">
-              {loggedIn ? <Redirect to="/" /> : <Redirect to="sign-in" />}
+              {loggedIn ? <Redirect to="/" /> : <Redirect to="signin" />}
             </Route>
           </Switch>
           <EditProfilePopup
