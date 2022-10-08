@@ -7,7 +7,7 @@ function Header(props) {
 
   function onSignOut() {
     localStorage.removeItem("token");
-    history.push("/sign-in");
+    history.push("/signin");
   }
 
   return (
@@ -15,19 +15,19 @@ function Header(props) {
       <img src={logo} alt="Логотип" className="header__logo" />
       <div className="header__container">
         <Switch>
-          <Route exact path="/sign-in">
-            <Link to="/sign-up" className="header__registration">
+          <Route exact path="/signin">
+            <Link to="/signup" className="header__registration">
               Регистрация
             </Link>
           </Route>
-          <Route exact path="/sign-up">
-            <Link to="/sign-in" className="header__registration">
+          <Route exact path="/signup">
+            <Link to="/signin" className="header__registration">
               Войти
             </Link>
           </Route>
           <Route path="/">
             <p className="header__email">{props.userData}</p>
-            <Link to="sign-in" className="header__sign-out" onClick={onSignOut}>
+            <Link to="signin" className="header__sign-out" onClick={onSignOut}>
               Выйти
             </Link>
           </Route>
