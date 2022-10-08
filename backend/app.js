@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const helmet = require('helmet');
+// const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
@@ -25,7 +25,7 @@ const app = express();
 app.use(bodyParser.json());
 
 app.use(cors());
-app.use(helmet());
+// app.use(helmet());
 app.use(limiter);
 
 app.use((req, res, next) => {
