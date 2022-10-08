@@ -14,6 +14,12 @@ const limiter = rateLimit({
   max: 100,
 });
 
+const allowedCors = [
+  'https://artyom.trus.nomoredomains.icu/',
+  'http://artyom.trus.nomoredomains.icu/',
+  'localhost:3000',
+];
+
 const app = express();
 
 app.use(bodyParser.json());
@@ -21,6 +27,14 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(helmet());
 app.use(limiter);
+
+app.use((req, res, next) => {
+  const { origin } = req.headers;
+  if (allowedCors.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+  }
+  next();
+});
 
 mongoose.connect('mongodb://localhost:27017/mestodb', {
   useNewUrlParser: true,
