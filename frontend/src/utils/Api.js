@@ -72,7 +72,7 @@ class Api {
   }
 
   registration(email, password) {
-    return fetch(`${this._authBaseUrl}/signup`, {
+    return fetch(`${this._baseUrl}/signup`, {
       method: "POST",
       headers: this._authHeaders,
       body: JSON.stringify({
@@ -83,7 +83,7 @@ class Api {
   }
 
   authorize(email, password) {
-    return fetch(`${this._authBaseUrl}/signin`, {
+    return fetch(`${this._baseUrl}/signin`, {
       method: "POST",
       headers: this._authHeaders,
       body: JSON.stringify({
