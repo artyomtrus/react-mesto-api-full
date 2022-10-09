@@ -122,7 +122,7 @@ class Api {
 const api = new Api({
   baseUrl: "https://artyom.trus.nomoredomains.icu",
   headers: {
-    authorization: "22b5d3c1-15e9-4089-aa4a-7712649273a9",
+    // authorization: "22b5d3c1-15e9-4089-aa4a-7712649273a9",
     "Content-Type": "application/json",
   },
   authBaseUrl: "https://api.artyom.trus.nomoredomains.icu",
