@@ -17,7 +17,6 @@ const limiter = rateLimit({
 const allowedCors = [
   'https://artyom.trus.nomoredomains.icu/',
   'http://artyom.trus.nomoredomains.icu/',
-  'localhost:3000',
 ];
 
 const app = express();
@@ -39,7 +38,7 @@ app.use((req, res, next) => {
     res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
     res.header('Access-Control-Allow-Headers', requestHeaders);
   }
-  return next();
+  next();
 });
 
 // app.use(cors({
