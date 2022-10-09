@@ -101,10 +101,10 @@ function App() {
     const token = localStorage.getItem("token");
     if (token) {
       api
-        .getContent(token)
+        .getContent()
         .then((res) => {
           if (res) {
-            setUserData(res.data.email);
+            setUserData(res.email);
             handleLogin();
             history.push("/");
           }
@@ -202,7 +202,7 @@ function App() {
   }
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i === currentUser._id);
     api
       .setLikeStatus(card._id, isLiked)
       .then((newCard) => {
@@ -236,6 +236,7 @@ function App() {
         if (data.token) {
           setUserData(email);
           handleLogin();
+          localStorage.setItem('token', data.token);
           history.push("/");
         }
       })
@@ -262,11 +263,18 @@ function App() {
       });
   }
 
+  function handleSignOut () {
+    localStorage.removeItem('token');
+    setLoggedIn(false);
+    history.push('/signin');
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="container">
         <div className="page">
-          <Header userData={userData} />
+          <Header userData={userData}
+                  onSignOut={handleSignOut}/>
           <Switch>
             <ProtectedRoute
               exact

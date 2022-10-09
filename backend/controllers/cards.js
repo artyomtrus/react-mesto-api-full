@@ -6,7 +6,7 @@ const IncorrectUser = require('../errors/incorrect-user');
 const getCards = (req, res, next) => {
   Card.find({})
     .then((card) => {
-      res.send({ data: card });
+      res.send(card);
     })
     .catch(next);
 };
@@ -35,7 +35,7 @@ const createCard = (req, res, next) => {
   const { name, link } = req.body;
   Card.create({ name, link, owner: req.user._id })
     .then((card) => {
-      res.send({ data: card });
+      res.send(card);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -52,7 +52,7 @@ const putLike = (req, res, next) => {
     { new: true },
   )
     .orFail(new NotFoundError('Передан несуществующий _id карточки.'))
-    .then((card) => res.send({ data: card }))
+    .then((card) => res.send(card))
     .catch((err) => {
       if (err.name === 'CastError') {
         return next(new BadRequestError('Переданы некорректные данные при постановке лайка.'));
@@ -68,7 +68,7 @@ const deleteLike = (req, res, next) => {
     { new: true },
   )
     .orFail(new NotFoundError('Передан несуществующий _id карточки.'))
-    .then((card) => res.send({ data: card }))
+    .then((card) => res.send(card))
     .catch((err) => {
       if (err.name === 'CastError') {
         return next(new BadRequestError('Переданы некорректные данные при снятии лайка'));

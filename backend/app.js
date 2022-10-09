@@ -11,12 +11,13 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 100,
+  max: 1000,
 });
 
 const allowedCors = [
   'https://artyom.trus.nomoredomains.icu/',
   'http://artyom.trus.nomoredomains.icu/',
+  'http://localhost:3001',
 ];
 
 const app = express();
@@ -25,20 +26,20 @@ app.use(bodyParser.json());
 
 app.use((req, res, next) => {
   const { origin } = req.headers;
-  console.log(origin);
   const { method } = req;
   const requestHeaders = req.headers['access-control-request-headers'];
   const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
 
   if (allowedCors.includes(origin)) {
-    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Origin', origin);
     res.header('Access-Control-Allow-Credentials', 'true');
   }
   if (method === 'OPTIONS') {
     res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
     res.header('Access-Control-Allow-Headers', requestHeaders);
+    return res.end();
   }
-  next();
+  return next();
 });
 
 // app.use(cors({

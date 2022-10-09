@@ -1,30 +1,36 @@
 class Api {
   constructor(config) {
     this._baseUrl = config.baseUrl;
-    this._headers = config.headers;
-    this._authBaseUrl = config.authBaseUrl;
-    this._authHeaders = config.authHeaders;
     this._getResponseData = this._getResponseData.bind(this);
   }
 
   getCards() {
     return fetch(`${this._baseUrl}/cards`, {
       method: "GET",
-      headers: this._headers,
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('token')}`,
+        "Content-Type": "application/json",
+      },
     }).then(this._getResponseData);
   }
 
   getUserId() {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "GET",
-      headers: this._headers,
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('token')}`,
+        "Content-Type": "application/json",
+      },
     }).then(this._getResponseData);
   }
 
   setUserId(data) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
-      headers: this._headers,
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('token')}`,
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(data),
     }).then(this._getResponseData);
   }
@@ -32,7 +38,10 @@ class Api {
   createCard(data) {
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
-      headers: this._headers,
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('token')}`,
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         name: data.name,
         link: data.link,
@@ -43,7 +52,10 @@ class Api {
   deleteCard(id) {
     return fetch(`${this._baseUrl}/cards/${id}`, {
       method: "DELETE",
-      headers: this._headers,
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('token')}`,
+        "Content-Type": "application/json",
+      },
     }).then(this._getResponseData);
   }
 
@@ -51,12 +63,18 @@ class Api {
     if (isLiked) {
       return fetch(`${this._baseUrl}/cards/${id}/likes`, {
         method: "DELETE",
-        headers: this._headers,
+        headers: {
+          authorization: `Bearer ${localStorage.getItem('token')}`,
+          "Content-Type": "application/json",
+        },
       }).then(this._getResponseData);
     } else {
       return fetch(`${this._baseUrl}/cards/${id}/likes`, {
         method: "PUT",
-        headers: this._headers,
+        headers: {
+          authorization: `Bearer ${localStorage.getItem('token')}`,
+          "Content-Type": "application/json",
+        },
       }).then(this._getResponseData);
     }
   }
@@ -64,7 +82,10 @@ class Api {
   createNewAvatar(data) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
-      headers: this._headers,
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('token')}`,
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         avatar: data.avatar,
       }),
@@ -72,9 +93,11 @@ class Api {
   }
 
   registration(email, password) {
-    return fetch(`${this._authBaseUrl}/signup`, {
+    return fetch(`${this._baseUrl}/signup`, {
       method: "POST",
-      headers: this._authHeaders,
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         password: password,
         email: email,
@@ -83,9 +106,11 @@ class Api {
   }
 
   authorize(email, password) {
-    return fetch(`${this._authBaseUrl}/signin`, {
+    return fetch(`${this._baseUrl}/signin`, {
       method: "POST",
-      headers: this._authHeaders,
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         password: password,
         email: email,
@@ -100,13 +125,12 @@ class Api {
       });
   }
 
-  getContent(token) {
-    return fetch(`${this._authBaseUrl}/users/me`, {
+  getContent() {
+    return fetch(`${this._baseUrl}/users/me`, {
       method: "GET",
       headers: {
-        Accept: "application/json",
+        authorization: `Bearer ${localStorage.getItem('token')}`,
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
       },
     }).then(this._getResponseData);
   }
@@ -117,16 +141,11 @@ class Api {
     }
     return Promise.reject(`Ошибка: ${res.status}`);
   };
+
 }
 
 const api = new Api({
-  baseUrl: "https://artyom.trus.nomoredomains.icu",
-  headers: {
-    // authorization: "22b5d3c1-15e9-4089-aa4a-7712649273a9",
-    "Content-Type": "application/json",
-  },
-  authBaseUrl: "https://api.artyom.trus.nomoredomains.icu",
-  authHeaders: { "Content-Type": "application/json" },
+  baseUrl: "https://api.artyom.trus.nomoredomains.icu",
 });
 
 export default api;

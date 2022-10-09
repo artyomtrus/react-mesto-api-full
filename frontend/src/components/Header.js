@@ -1,13 +1,11 @@
 import logo from "../images/logo.svg";
 import React from "react";
-import { Link, Route, Switch, useHistory } from "react-router-dom";
+import { Link, Route, Switch } from "react-router-dom";
 
 function Header(props) {
-  const history = useHistory();
 
   function onSignOut() {
-    localStorage.removeItem("token");
-    history.push("/signin");
+   props.onSignOut();
   }
 
   return (
