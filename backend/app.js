@@ -17,7 +17,6 @@ const limiter = rateLimit({
 // const allowedCors = [
 //   'https://artyom.trus.nomoredomains.icu/',
 //   'http://artyom.trus.nomoredomains.icu/',
-//   'artyom.trus.nomoredomains.icu',
 //   'localhost:3000',
 // ];
 
@@ -25,7 +24,16 @@ const app = express();
 
 app.use(bodyParser.json());
 
-app.use(cors());
+app.use(cors({
+  origin: [
+    'https://artyom.trus.nomoredomains.icu/',
+    'http://artyom.trus.nomoredomains.icu/',
+    'localhost:3000',
+  ],
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+  credentials: true,
+}));
+
 app.use(helmet());
 app.use(limiter);
 
