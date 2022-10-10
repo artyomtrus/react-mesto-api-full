@@ -26,6 +26,8 @@ app.use(bodyParser.json());
 
 app.use((req, res, next) => {
   const { origin } = req.headers;
+  // eslint-disable-next-line no-debugger
+  debugger;
   console.log(origin);
   const { method } = req;
   const requestHeaders = req.headers['access-control-request-headers'];
