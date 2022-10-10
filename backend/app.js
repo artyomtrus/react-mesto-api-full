@@ -15,9 +15,8 @@ const limiter = rateLimit({
 });
 
 const allowedCors = [
-  'https://artyom.trus.nomoredomains.icu/',
-  'http://artyom.trus.nomoredomains.icu/',
-  'http://localhost:3001',
+  'https://artyom.trus.nomoredomains.icu',
+  'http://artyom.trus.nomoredomains.icu',
 ];
 
 const app = express();
@@ -26,9 +25,6 @@ app.use(bodyParser.json());
 
 app.use((req, res, next) => {
   const { origin } = req.headers;
-  // eslint-disable-next-line no-debugger
-  debugger;
-  console.log(origin);
   const { method } = req;
   const requestHeaders = req.headers['access-control-request-headers'];
   const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
