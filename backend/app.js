@@ -20,6 +20,8 @@ const allowedCors = [
 
 const app = express();
 
+console.log(process.env.NODE_ENV);
+
 app.use(bodyParser.json());
 
 app.use((req, res, next) => {
